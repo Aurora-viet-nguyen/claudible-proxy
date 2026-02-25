@@ -1,0 +1,12 @@
+services:
+  claudible-proxy:
+    build: .
+    container_name: claudible-proxy
+    restart: unless-stopped
+    ports:
+      - "9999:9999"
+    environment:
+      - PROXY_PORT=9999
+      # Reads CLAUDE_CODE_VERSION from your host shell env
+      # Set it via: export CLAUDE_CODE_VERSION=$(claude --version | awk '{print $NF}')
+      - CLAUDE_CODE_VERSION=${CLAUDE_CODE_VERSION:-1.0.57}
